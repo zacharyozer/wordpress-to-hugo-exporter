@@ -51,6 +51,7 @@ class Hugo_Export
         'Markdownify\Parser'         => '%pwd%/includes/markdownify/Parser.php',
         'Markdownify\Converter'      => '%pwd%/includes/markdownify/Converter.php',
         'Markdownify\ConverterExtra' => '%pwd%/includes/markdownify/ConverterExtra.php',
+        'Parsedown'                  => '%pwd%/includes/Parsedown.php',
     );
 
     /**
@@ -220,6 +221,13 @@ class Hugo_Export
         $content   = apply_filters('the_content', $post->post_content);
         $converter = new Markdownify\ConverterExtra;
         $markdown  = $converter->parseString($content);
+        $Parsedown = new Parsedown();
+        echo "***********Content***********";
+        echo $content;
+        echo "***********Markdown***********";
+        echo $markdown;
+        echo "***********Content from Markdown***********";
+        echo $Parsedown->text($markdown);
 
         if (false !== strpos($markdown, '[]: ')) {
             // faulty links; return plain HTML
